@@ -121,6 +121,8 @@ EOF
 
 # Python venv aliases
 alias av="source venv/bin/activate"
+alias sdn="sudo shutdown now"
+alias update="sudo apt update && sudo apt upgrade -y"
 EOF
     fi
 else

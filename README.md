@@ -25,6 +25,8 @@ chmod +x install.sh
 | Alias | Command |
 |---|---|
 | `av` | `source venv/bin/activate` |
+| `sdn` | `sudo shutdown now` |
+| `update` | `sudo apt update && sudo apt upgrade -y` |
 
 ## Files
 
