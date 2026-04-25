@@ -62,6 +62,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 EOF
     fi
+
+    # Add venv aliases
+    if ! grep -q 'mkvenv' "$HOME/.bashrc"; then
+        cat >> "$HOME/.bashrc" <<'EOF'
+
+# Python venv aliases
+alias av="source venv/bin/activate"
+EOF
+    fi
 else
     echo ">>> pyenv already installed, skipping."
     export PYENV_ROOT="$HOME/.pyenv"
