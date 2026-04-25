@@ -18,9 +18,13 @@ sudo apt install -y \
     build-essential \
     ripgrep \
     fd-find \
+    fzf \
     tmux \
     unzip \
-    xclip
+    xclip \
+    python-is-python3 \
+    python3-venv \
+    python3-pip
 
 # -------------------------------------------------------------------
 # Python build dependencies (needed by pyenv)
@@ -39,6 +43,18 @@ sudo apt install -y \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev
+
+# -------------------------------------------------------------------
+# tmux config (vi keys + clipboard + 256 colors)
+# -------------------------------------------------------------------
+echo ">>> Setting up tmux.conf..."
+cat << 'TMUX' > ~/.tmux.conf
+set-window-option -g mode-keys vi
+set -g default-terminal "screen-256color"
+set -as terminal-features ",xterm-256color:RGB"
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
+TMUX
 
 # -------------------------------------------------------------------
 # pyenv
@@ -115,12 +131,13 @@ export PATH="$HOME/.local/bin:$PATH"
 echo ">>> Neovim version: $(nvim --version | head -1)"
 
 # -------------------------------------------------------------------
-# kickstart.nvim (sensible Neovim starter config)
+# LazyVim (Neovim IDE config)
 # -------------------------------------------------------------------
 NVIM_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
 if [[ ! -d "$NVIM_CONFIG_DIR" ]]; then
-    echo ">>> Installing kickstart.nvim config..."
-    git clone https://github.com/nvim-lua/kickstart.nvim.git "$NVIM_CONFIG_DIR"
+    echo ">>> Installing LazyVim starter config..."
+    git clone https://github.com/LazyVim/starter "$NVIM_CONFIG_DIR"
+    rm -rf "$NVIM_CONFIG_DIR/.git"
 else
     echo ">>> Neovim config already exists at $NVIM_CONFIG_DIR, skipping."
 fi
