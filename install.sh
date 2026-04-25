@@ -24,7 +24,43 @@ sudo apt install -y \
     xclip \
     python-is-python3 \
     python3-venv \
-    python3-pip
+    python3-pip \
+    libfuse2t64 \
+    pipx \
+    plocate \
+    glances
+
+# -------------------------------------------------------------------
+# GitHub CLI
+# -------------------------------------------------------------------
+if ! command -v gh &>/dev/null; then
+    echo ">>> Installing GitHub CLI..."
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install -y gh
+else
+    echo ">>> GitHub CLI already installed, skipping."
+fi
+
+# -------------------------------------------------------------------
+# Docker
+# -------------------------------------------------------------------
+if ! command -v docker &>/dev/null; then
+    echo ">>> Installing Docker..."
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /tmp/docker.asc
+    sudo cp /tmp/docker.asc /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo usermod -aG docker "$USER"
+    echo ">>> NOTE: Log out and back in for docker group to take effect."
+else
+    echo ">>> Docker already installed, skipping."
+fi
 
 # -------------------------------------------------------------------
 # Python build dependencies (needed by pyenv)
@@ -149,3 +185,7 @@ echo ""
 echo "=== Install complete! ==="
 echo "Open a new terminal or run:  source ~/.bashrc"
 echo "Then run:  nvim"
+echo ""
+echo "Don't forget:"
+echo "  - 'gh auth login' to authenticate GitHub CLI"
+echo "  - Log out/in if Docker was just installed (group permissions)"
