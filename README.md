@@ -15,7 +15,7 @@ chmod +x install.sh
 
 - **Neovim** (latest stable via AppImage) with **LazyVim** starter config
 - **Python dev tooling**: pyenv, python3, pip, venv, black, ruff, mypy, pynvim
-- **tmux** with vi keys, 256 color, and system clipboard support
+- **tmux** with backtick (`) prefix, vi keys, 256 color, and system clipboard support
 - **GitHub CLI** (`gh`)
 - **Docker** (docker-ce, compose, buildx)
 - **Essentials**: git, curl, wget, build-essential, ripgrep, fd-find, fzf, xclip, pipx, plocate, glances, libfuse2t64, python-is-python3

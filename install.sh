@@ -81,10 +81,15 @@ sudo apt install -y \
     liblzma-dev
 
 # -------------------------------------------------------------------
-# tmux config (vi keys + clipboard + 256 colors)
+# tmux config (backtick prefix + vi keys + clipboard + 256 colors)
 # -------------------------------------------------------------------
 echo ">>> Setting up tmux.conf..."
 cat << 'TMUX' > ~/.tmux.conf
+# Change prefix from Ctrl-b to backtick
+unbind C-b
+set-option -g prefix `
+bind ` send-prefix
+
 set-window-option -g mode-keys vi
 set -g default-terminal "screen-256color"
 set -as terminal-features ",xterm-256color:RGB"

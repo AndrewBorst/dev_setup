@@ -1,25 +1,30 @@
-# Commands I Can't Remember
+## tmux Pane Management
+
+| Action | Keys |
+|---|---|
+| Split pane vertically | `Prefix %` |
+| Split pane horizontally | `Prefix "` |
+| Navigate to pane | `Prefix arrow` |
+| Cycle through panes | `Prefix o` |
+| Close current pane | `Prefix x` |
+| Toggle pane zoom | `Prefix z` |
+| Show pane numbers | `Prefix q` |
+| Resize pane | `Prefix Ctrl+arrow` |
+| Convert pane to window | `Prefix !` |
+| Swap panes | `Prefix {` or `Prefix }` |
+
 
 ## tmux Copy/Paste
 
 | Action | Keys |
 |---|---|
-| Enter copy mode | `Ctrl-b [` |
+| Enter copy mode | `Prefix [` |
 | Start selection | `Space` |
 | Copy selection | `Enter` |
-| Paste buffer | `Ctrl-b ]` |
-| List paste buffers | `Ctrl-b #` |
-| Copy to system clipboard (xclip) | `Ctrl-b [`, select, then `y` (if configured) |
+| Paste buffer | `Prefix ]` |
+| List paste buffers | `Prefix #` |
+| Copy to system clipboard (xclip) | `Prefix [`, select, then `y` (if configured) |
 
-### tmux.conf for system clipboard
-
-```bash
-# Add to ~/.tmux.conf
-set -g mouse on
-setw -g mode-keys vi
-bind -T copy-mode-vi v send -X begin-selection
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
-```
 
 ## Neovim Copy/Paste
 
@@ -33,12 +38,3 @@ bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
 | Yank to end of line | `y$` |
 | Paste before cursor | `P` |
 | Paste after cursor | `p` |
-
-### Enable system clipboard in Neovim
-
-```lua
--- Add to init.lua
-vim.opt.clipboard = "unnamedplus"
-```
-
-This makes `y` and `p` use the system clipboard by default (no `"+` prefix needed).
