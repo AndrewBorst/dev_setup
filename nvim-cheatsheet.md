@@ -1,32 +1,6 @@
-## tmux Pane Management
+# Neovim Cheatsheet
 
-| Action | Keys |
-|---|---|
-| Split pane vertically | `Prefix %` |
-| Split pane horizontally | `Prefix "` |
-| Navigate to pane | `Prefix arrow` |
-| Cycle through panes | `Prefix o` |
-| Close current pane | `Prefix x` |
-| Toggle pane zoom | `Prefix z` |
-| Show pane numbers | `Prefix q` |
-| Resize pane | `Prefix Ctrl+arrow` |
-| Convert pane to window | `Prefix !` |
-| Swap panes | `Prefix {` or `Prefix }` |
-
-
-## tmux Copy/Paste
-
-| Action | Keys |
-|---|---|
-| Enter copy mode | `Prefix [` |
-| Start selection | `Space` |
-| Copy selection | `Enter` |
-| Paste buffer | `Prefix ]` |
-| List paste buffers | `Prefix #` |
-| Copy to system clipboard (xclip) | `Prefix [`, select, then `y` (if configured) |
-
-
-## Neovim File Explorer (nvim-tree / Netrw)
+## File Explorer (nvim-tree / Netrw)
 
 | Action | Keys |
 |---|---|
@@ -40,7 +14,7 @@
 | Refresh explorer | `R` |
 | Create new file | `a` (nvim-tree) / `%` (Netrw) |
 
-## Neovim Splits / Panes
+## Splits / Panes
 
 | Action | Keys |
 |---|---|
@@ -62,15 +36,26 @@
 | Move pane to new tab | `Ctrl+w T` |
 
 
-## Neovim Copy/Paste
+## Copy/Paste
 
 | Action | Keys |
 |---|---|
 | Yank (copy) line | `yy` |
 | Yank selection | `v` select then `y` |
 | Yank to system clipboard | `"+y` |
-| Paste from system clipboard | `"+p` |
 | Yank entire file | `:%y+` |
 | Yank to end of line | `y$` |
 | Paste before cursor | `P` |
 | Paste after cursor | `p` |
+| Paste from system clipboard | `"+p` |
+
+
+## Copying from Messages Buffer
+
+**Note:** `:%y` doesn't work in the `:mess` output buffer.
+
+Instead:
+1. `:mess` to open messages
+2. Manually select the error with `V` + arrow keys
+3. `y` to yank
+4. Paste wherever needed
